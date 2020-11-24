@@ -77,6 +77,8 @@ def login(request):
         if bcrypt.checkpw(user_input['password'].encode('utf-8'), user.password.encode('utf-8')):
             access_token = prepare_encode_jwt_access(user_input['username'])
             refresh_token = prepare_encode_jwt_refresh(user_input['username'])
+            user.refresh_token = refresh_token
+            user.save()
             return Response({
                 'access_token': access_token, 
                 'refresh_token': refresh_token,

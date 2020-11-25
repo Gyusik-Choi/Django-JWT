@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import UserSerializer, UsernameSerializer
-from signup.settings import SECRET_KEY, ALGORITHM
+from signup.settings import SECRET_KEY_JWT, ALGORITHM
 
 # password1, password2의 일치여부는 프론트에서 처리하자
 # password1의 길이를 체크(8자 이상)
@@ -103,7 +103,7 @@ def prepare_encode_jwt_access(username):
 
 
 def encode_jwt_access(data):
-    return jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM).decode("utf-8")
+    return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")
 
 
 def prepare_encode_jwt_refresh(username):
@@ -119,4 +119,4 @@ def prepare_encode_jwt_refresh(username):
 
 
 def encode_jwt_refresh(data):
-    return jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM).decode("utf-8")
+    return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")

@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd*s7tx8ms^-ms6cy(lex293+1jeaun_-45xc8_g@$zv6%^x#-2'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,4 +136,5 @@ def get_secret(setting, secrets=secrets):
         raise ImproperlyConfigured
 
 SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY_JWT = get_secret("SECRET_KEY_JWT")
 ALGORITHM = get_secret("ALGORITHM")

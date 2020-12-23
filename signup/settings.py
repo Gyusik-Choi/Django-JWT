@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'django_extensions',
+    'reviews',
 ]
 
 MIDDLEWARE = [

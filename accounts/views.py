@@ -76,12 +76,12 @@ def login(request):
         user = User.objects.get(email=user_input['email'])
         if bcrypt.checkpw(user_input['password'].encode('utf-8'), user.password.encode('utf-8')):
             access_token = prepare_encode_jwt_access(user_input['username'])
-            refresh_token = prepare_encode_jwt_refresh(user_input['username'])
-            user.refresh_token = refresh_token
+            # refresh_token = prepare_encode_jwt_refresh(user_input['username'])
+            # user.refresh_token = refresh_token
             user.save()
             return Response({
                 'access_token': access_token, 
-                'refresh_token': refresh_token,
+                # 'refresh_token': refresh_token,
                 'message': '로그인에 성공했습니다'
             })
         else:
@@ -106,17 +106,17 @@ def encode_jwt_access(data):
     return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")
 
 
-def prepare_encode_jwt_refresh(username):
-    iat = datetime.now()
-    exp = iat + timedelta(days=7)
+# def prepare_encode_jwt_refresh(username):
+#     iat = datetime.now()
+#     exp = iat + timedelta(days=7)
 
-    data = {
-        "iat": iat.timestamp(),
-        "exp": exp.timestamp(),
-        "aud": username,
-    }
-    return encode_jwt_refresh(data)
+#     data = {
+#         "iat": iat.timestamp(),
+#         "exp": exp.timestamp(),
+#         "aud": username,
+#     }
+#     return encode_jwt_refresh(data)
 
 
-def encode_jwt_refresh(data):
-    return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")
+# def encode_jwt_refresh(data):
+#     return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")

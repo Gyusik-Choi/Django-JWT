@@ -67,3 +67,10 @@ access_token을 바탕으로 decoding을 요청하게 되는 함수의 일부분
 audience를 테스트용으로 회원가입한 username을 하드코딩으로 직접 넣었다.
 
 그리고 한가지 특이했던 점은 pyjwt 내부 코드의 decode 함수 부분의 파라미터에서 algorithms라고 적혀있으나 요청할때 인자를 algorithm으로 보내도 동작에는 문제가 없었다.
+
+
+
+참고
+
+https://github.com/jpadilla/pyjwt/issues/120
+

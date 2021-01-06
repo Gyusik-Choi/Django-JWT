@@ -56,16 +56,14 @@ _validate_claims 함수에서 audience=None으로 되어있다.
 
 
 
-access_token을 바탕으로 decoding을 요청하게 되는 함수의 일부분이다.
-
-아래는 audience를 테스트용으로 회원가입한 username을 하드코딩으로 직접 넣었다.
-
 ```python
 access_token = request.headers.get('Authorization')
 # audience는 username에 해당하는 정보를 넣어야 하는데 여기로 어떻게 views.py에서 넘길지 아직 잘 모르겠다.
 payload = jwt.decode(access_token, SECRET_KEY_JWT, algorithms=ALGORITHM, audience="abcde")
 ```
 
+access_token을 바탕으로 decoding을 요청하게 되는 함수의 일부분이다.
 
+아래는 audience를 테스트용으로 회원가입한 username을 하드코딩으로 직접 넣었다.
 
 그리고 한가지 특이했던 점은 pyjwt 내부 코드의 decode 함수 부분의 파라미터에서 algorithms라고 적혀있으나 요청할때 인자를 algorithm으로 보내도 동작에는 문제가 없었다.

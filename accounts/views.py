@@ -106,17 +106,17 @@ def encode_jwt_access(data):
     return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")
 
 
-# def prepare_encode_jwt_refresh(username):
-#     iat = datetime.now()
-#     exp = iat + timedelta(days=7)
+def prepare_encode_jwt_refresh(username):
+    iat = datetime.now()
+    exp = iat + timedelta(days=7)
 
-#     data = {
-#         "iat": iat.timestamp(),
-#         "exp": exp.timestamp(),
-#         "aud": username,
-#     }
-#     return encode_jwt_refresh(data)
+    data = {
+        "iat": iat.timestamp(),
+        "exp": exp.timestamp(),
+        "aud": username,
+    }
+    return encode_jwt_refresh(data)
 
 
-# def encode_jwt_refresh(data):
-#     return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")
+def encode_jwt_refresh(data):
+    return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")

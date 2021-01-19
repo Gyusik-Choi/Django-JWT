@@ -76,12 +76,12 @@ def login(request):
         user = User.objects.get(email=user_input['email'])
         if bcrypt.checkpw(user_input['password'].encode('utf-8'), user.password.encode('utf-8')):
             access_token = prepare_encode_jwt_access(user_input['username'])
-            # refresh_token = prepare_encode_jwt_refresh(user_input['username'])
-            # user.refresh_token = refresh_token
+            refresh_token = prepare_encode_jwt_refresh(user_input['username'])
+            user.refresh_token = refresh_token
             user.save()
             return Response({
                 'access_token': access_token, 
-                # 'refresh_token': refresh_token,
+                'refresh_token': refresh_token,
                 'message': '로그인에 성공했습니다'
             })
         else:
@@ -120,3 +120,16 @@ def prepare_encode_jwt_refresh(username):
 
 def encode_jwt_refresh(data):
     return jwt.encode(data, SECRET_KEY_JWT, algorithm=ALGORITHM).decode("utf-8")
+
+
+@api_view(['POST'])
+def logout(request):
+    access_token = request.headers.get('Authorization')
+    audience_name = request.data['username']
+    payload = jwt.decode(access_token, SECRET_KEY_JWT, algorithms=ALGORITHM, audience=audience_name)
+
+    User = get_user_model()
+    user = User.objects.get(username=payload['aud'])
+    user.refresh_token = None
+    user.save()
+    return Response({'message': '로그아웃 되었습니다.'})

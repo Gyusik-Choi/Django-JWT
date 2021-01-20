@@ -68,6 +68,10 @@ access_token을 바탕으로 decoding을 요청하게 되는 함수의 일부분
 
 
 
+추가해야할 부분은 데코레이터에서 토큰 만료를 리턴하게 되면 클라이언트에서 토큰 재발급을 위한 요청을 넣는데 이를 어떻게 처리할 것인지와 만약에 refresh token을 기반으로 access token을 재발급한다고 하면 refresh token마저 만료일때 어떻게 처리할지다.
+
+
+
 참고
 
 https://github.com/jpadilla/pyjwt/issues/120

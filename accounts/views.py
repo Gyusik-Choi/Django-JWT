@@ -92,7 +92,7 @@ def login(request):
 
 def prepare_encode_jwt_access(username):
     iat = datetime.now()
-    exp = iat + timedelta(hours=1)
+    exp = iat + timedelta(seconds=10)
 
     data = {
         "iat": iat.timestamp(),
